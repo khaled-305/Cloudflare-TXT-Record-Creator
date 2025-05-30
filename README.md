@@ -4,16 +4,16 @@
 -  cd cloudflare-txt-record-creator
 
 # Install dependencies:
-npm install
+- npm install
 
 # Create a .env.local file in the root directory with your Cloudflare credentials
-CF_API_TOKEN=
-CF_ACCOUNT_ID=
+- CF_API_TOKEN=
+- CF_ACCOUNT_ID=
 
 # Start the development server:
-npm run dev
+- npm run dev
 
-Open http://localhost:3000 in your browser.
+- Open http://localhost:3000 in your browser.
 
 ## Obtaining Cloudflare Credentials
 # API Token:
