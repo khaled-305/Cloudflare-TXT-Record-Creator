@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cloudflare TXT Record Creator
 
-## Getting Started
+A Next.js web application that allows users to create TXT records in Cloudflare DNS, with automatic zone creation if the domain doesn't exist.
 
-First, run the development server:
+## Features
 
-```bash
+- Create TXT records via Cloudflare API
+- Automatically creates DNS zone if it doesn't exist
+- Simple, clean UI with status feedback
+- Built with Next.js (App Router), TypeScript, and Tailwind CSS
+- Edge runtime for API routes
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/cloudflare-txt-record-creator.git
+   cd cloudflare-txt-record-creator
+
+# Install dependencies:
+npm install
+
+# Create a .env.local file in the root directory with your Cloudflare credentials
+CF_API_TOKEN=
+CF_ACCOUNT_ID=
+
+# Start the development server:
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Obtaining Cloudflare Credentials
+# API Token:
+- Go to Cloudflare Dashboard > Manage Account (from bottom left menu) > Account API Tokens > Create Token
+- Then, Create a token with these permissions: Zone:Zone:Read, Zone:DNS:Edit, Zone:Zone:Edit
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Account ID
+-Found in the Cloudflare Dashboard URL when viewing your account overview. Format: https://dash.cloudflare.com/<account-id>
 
-## Learn More
+Time Spent: 1.5 hours
 
-To learn more about Next.js, take a look at the following resources:
+# Approach
+- Started with a simple Next.js page component using the App Router
+- Created an Edge Runtime API route for Cloudflare API interactions
+- Added comprehensive error handling and user feedback
+- Implemented automatic zone creation when domain doesn't exist
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Trade-offs 
+- State Management: Used React state instead of utilizing Zustand, or Redux to keep things simple
+- Error Handling: Basic error messages that could be enhanced with more specific feedback
+- Zone Creation: Simple implementation that might need more validation for production use
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# If you had an extra hour, how would you extend this feature?
+- Add domain validation
+- Implement a list view of existing TXT records
+- Add record TTL configuration
+- Include more detailed error messages
+- Definitely add authentication 
