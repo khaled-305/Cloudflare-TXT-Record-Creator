@@ -6,7 +6,7 @@ export async function POST(request: Request) {
   try {
     const { recordName, recordValue, domain } = await request.json();
 
-    // Validate inputs
+     // Input validation
     if (!recordName || !recordValue || !domain) {
       return NextResponse.json(
         {
@@ -38,6 +38,8 @@ export async function POST(request: Request) {
     const zonesData = await zonesResponse.json();
     let zoneId = zonesData.result?.[0]?.id;
 
+    console.log(zoneId)
+
     // If zone doesn't exist, create it
     if (!zoneId) {
       const createZoneResponse = await fetch(
@@ -53,7 +55,7 @@ export async function POST(request: Request) {
             account: {
               id: CF_ACCOUNT_ID,
             },
-            jump_start: true,
+            jump_start: true, // Automatically fetch common DNS records
           }),
         }
       );
@@ -95,12 +97,14 @@ export async function POST(request: Request) {
       );
     }
 
+     // Success response
     return NextResponse.json({
       success: true,
       message: "TXT record created successfully",
       data: dnsData.result,
     });
   } catch (error) {
+    // Unified error handling
     return NextResponse.json(
       {
         success: false,
